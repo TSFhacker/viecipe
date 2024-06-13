@@ -14,6 +14,7 @@ import { FaSearch } from "react-icons/fa";
 import defaultImage from "@/assets/default_profile.svg";
 import { CiBellOn } from "react-icons/ci";
 import { timeAgo } from "@/lib/helper";
+import Loading from "@/app/meals/loading";
 
 export default function MainHeader() {
   const [loggedIn, setLoggedIn] = useState(null);
@@ -113,6 +114,7 @@ export default function MainHeader() {
                           notification.status === "unread" &&
                           classes.unread_noti
                         }
+                        onClick={() => setNotificationDropdown(classes.hidden)}
                       >
                         <li>
                           {notification.content.length > 50
@@ -126,69 +128,75 @@ export default function MainHeader() {
                   </ul>
                 </>
               )}
-              <Image
-                src={
-                  user.image
-                    ? `https://dungbui1110-nextjs-foodies-image.s3.ap-southeast-1.amazonaws.com/${user.image}`
-                    : defaultImage
-                }
-                alt="Ảnh đại diện"
-                width={30}
-                height={30}
-                className={classes.profile_picture}
-                onClick={() => {
-                  dropdown ? setDropdown("") : setDropdown(classes.hidden);
-                }}
-              />
-              <p className={classes.username}>{user.name || user.email}</p>
+              <div className={classes.logged_in_menu}>
+                <Image
+                  src={
+                    user.image
+                      ? `https://dungbui1110-nextjs-foodies-image.s3.ap-southeast-1.amazonaws.com/${user.image}`
+                      : defaultImage
+                  }
+                  alt="Ảnh đại diện"
+                  width={30}
+                  height={30}
+                  className={classes.profile_picture}
+                  onClick={() => {
+                    dropdown ? setDropdown("") : setDropdown(classes.hidden);
+                  }}
+                />
+                <p className={classes.username}>{user.name || user.email}</p>
+              </div>
             </>
           )}
-          <ul className={user && `${classes.nav_dropdown} ${dropdown}`}>
-            {!admin && (
-              <>
-                <li>
-                  <NavLink href="/meals">Công thức</NavLink>
-                </li>
-                <li>
-                  <NavLink href="/community">Cộng đồng</NavLink>
-                </li>
-              </>
-            )}
-            {loggedIn && (
-              <>
-                {!admin ? (
-                  <>
-                    <li>
-                      <NavLink href="/profile">Hồ sơ</NavLink>
-                    </li>
-                    <li>
-                      <NavLink href="/meals/share">Đăng công thức</NavLink>
-                    </li>
-                  </>
-                ) : (
-                  <>
-                    <li>
-                      <NavLink href="/admin/users">Người dùng</NavLink>
-                    </li>
-                    <li>
-                      <NavLink href="/admin/recipes">Công thức</NavLink>
-                    </li>
-                  </>
-                )}
-                <li>
-                  <button className={classes.logout} onClick={handleSignout}>
-                    Đăng xuất
-                  </button>
-                </li>
-              </>
-            )}
+          {loggedIn !== null ? (
+            <ul className={user && `${classes.nav_dropdown} ${dropdown}`}>
+              {!admin && (
+                <>
+                  <li onClick={() => setDropdown(classes.hidden)}>
+                    <NavLink href="/meals">Công thức</NavLink>
+                  </li>
+                  <li onClick={() => setDropdown(classes.hidden)}>
+                    <NavLink href="/community">Cộng đồng</NavLink>
+                  </li>
+                </>
+              )}
+              {loggedIn && (
+                <>
+                  {!admin ? (
+                    <>
+                      <li onClick={() => setDropdown(classes.hidden)}>
+                        <NavLink href="/profile">Hồ sơ</NavLink>
+                      </li>
+                      <li onClick={() => setDropdown(classes.hidden)}>
+                        <NavLink href="/meals/share">Đăng công thức</NavLink>
+                      </li>
+                    </>
+                  ) : (
+                    <>
+                      <li onClick={() => setDropdown(classes.hidden)}>
+                        <NavLink href="/admin/users">Người dùng</NavLink>
+                      </li>
+                      <li onClick={() => setDropdown(classes.hidden)}>
+                        <NavLink href="/admin/recipes">Công thức</NavLink>
+                      </li>
+                    </>
+                  )}
+                  <li onClick={() => setDropdown(classes.hidden)}>
+                    <button className={classes.logout} onClick={handleSignout}>
+                      Đăng xuất
+                    </button>
+                  </li>
+                </>
+              )}
 
-            {loggedIn === false && !pathName.startsWith("/auth") && (
-              <li>
-                <NavLink href={`/auth${pathName}`}>Đăng nhập</NavLink>
-              </li>
-            )}
-          </ul>
+              {loggedIn === false && !pathName.startsWith("/auth") && (
+                <li>
+                  <NavLink href={`/auth${pathName}`}>Đăng nhập</NavLink>
+                </li>
+              )}
+            </ul>
+          ) : (
+            <Loading />
+          )}
         </nav>
       </header>
     </>

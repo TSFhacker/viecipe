@@ -13,6 +13,8 @@
 
 .nav {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .nav ul {
@@ -86,10 +88,15 @@
   cursor: pointer;
 }
 
+.logged_in_menu {
+  display: flex;
+  align-items: center;
+}
+
 .profile_picture {
   cursor: pointer;
   border-radius: 100%;
-  display: inline-block;
+  display: inline;
 }
 
 .username {
@@ -107,7 +114,7 @@
   background-image: linear-gradient(132deg, #f4d03f 0%, #16a085 100%);
   height: 15rem;
   position: absolute;
-  top: 2rem;
+  top: 4rem;
   right: 0;
   width: 15rem;
   border-radius: 1rem;
@@ -128,7 +135,7 @@
   height: fit-content;
   max-height: 15rem;
   position: absolute;
-  top: 2rem;
+  top: 4rem;
   right: 4rem;
   width: 20rem;
   border-radius: 1rem;
@@ -170,8 +177,8 @@
   width: 1rem;
   display: inline;
   position: absolute;
-  right: 8rem;
-  top: -1rem;
+  right: 14rem;
+  top: 0;
   text-align: center;
 }
 
