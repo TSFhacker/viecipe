@@ -1,0 +1,43 @@
+.icon_container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.filter_icon {
+  height: 2rem;
+  width: 2rem;
+  margin-right: 5rem;
+  float: right;
+  cursor: pointer;
+}
+
+.dropdown {
+  background-color: white;
+  overflow: hidden;
+  position: absolute;
+  z-index: 10;
+  list-style: none;
+  top: 1rem;
+  right: 3rem;
+  height: fit-content;
+  width: 25rem;
+  text-align: center;
+  padding: 0;
+}
+
+.dropdown > * {
+  height: 3rem;
+  width: 100%;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.dropdown > *:hover {
+  background-color: lightgray;
+}
+
+.hidden {
+  height: 0;
+}

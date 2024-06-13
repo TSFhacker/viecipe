@@ -1,0 +1,56 @@
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  justify-content: flex-start;
+}
+
+.picker .input {
+  display: none;
+}
+
+.picker label {
+  color: white;
+  padding: 0.5rem 2.5rem;
+  font-weight: 700;
+  height: 2rem;
+}
+
+.picker .button {
+  cursor: pointer;
+  font: inherit;
+  color: white;
+  background: linear-gradient(90deg, #ff8a05, #f9b331);
+  border-radius: 4px;
+  padding: 0.5rem 2.5rem;
+  font-weight: 700;
+  border: none;
+  text-align: center;
+}
+
+.picker .button:hover,
+.picker .button:focus {
+  background: #b3b9c6;
+}
+
+.preview {
+  width: 10rem;
+  height: 10rem;
+  border: 2px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.preview p {
+  margin: 0;
+  padding: 1rem;
+}
+
+.preview img {
+  object-fit: cover;
+}

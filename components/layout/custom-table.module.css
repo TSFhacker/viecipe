@@ -1,0 +1,30 @@
+.custom_table {
+  width: 100%;
+  border: 1px solid gray;
+  text-align: center;
+}
+
+.custom_table td {
+  border: 1px solid gray;
+}
+
+.custom_table th {
+  border: 1px solid gray;
+}
+
+.icon {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.block {
+  color: red;
+}
+
+.unblock {
+  color: green;
+}
+
+.trash {
+  color: red;
+}

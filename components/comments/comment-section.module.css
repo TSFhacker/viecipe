@@ -1,0 +1,49 @@
+.comment_section {
+  width: 100%;
+}
+
+.my_comment_container {
+  position: relative;
+}
+
+.my_comment {
+  width: 60%;
+  margin: 2rem 10rem;
+  margin-left: 20rem;
+  border: none;
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
+  border-radius: 2rem;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+}
+
+.bookmark {
+  position: absolute;
+  top: 2rem;
+  right: 0;
+  height: 3rem;
+  width: 3rem;
+  color: white;
+  cursor: pointer;
+}
+
+.bookmarked {
+  color: yellowgreen;
+}
+
+.comment_button {
+  position: absolute;
+  bottom: 3rem;
+  right: 27rem;
+  height: 3rem;
+  background-color: greenyellow;
+  cursor: pointer;
+  border: none;
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+}
+
+.comment_button:active {
+  transform: scale(0.95);
+}

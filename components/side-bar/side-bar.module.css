@@ -1,0 +1,47 @@
+.sidebar {
+  width: 2%;
+  background-image: linear-gradient(180deg, #f4d03f 0%, #16a085 100%);
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  padding-left: 0;
+  justify-content: space-around;
+  margin-top: 0;
+  transition: 0.5s all;
+  z-index: 100;
+}
+
+.sidebar:hover {
+  width: 4%;
+}
+
+.sidebar > * {
+  width: 100%;
+  flex: 33%;
+}
+
+.sidebar > *:hover {
+  background: linear-gradient(132deg, #16a085 0%, #f4d03f 100%);
+}
+
+.sidebar li {
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+  padding-top: 4rem;
+}
+
+.sidebar svg {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.current {
+  fill: white;
+  color: white;
+}
