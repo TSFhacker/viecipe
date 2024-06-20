@@ -5,6 +5,7 @@ import defaultImage from "@/assets/default_profile.svg";
 
 import classes from "./meal-item.module.css";
 import Stars from "../ratings/stars";
+import { timeAgo } from "@/lib/helper";
 
 export default async function MealItem(props) {
   const {
@@ -15,6 +16,7 @@ export default async function MealItem(props) {
     user_info,
     session,
     ratingAvg,
+    created_at,
   } = props;
 
   const userId = session ? session.userId : null;
@@ -75,6 +77,7 @@ export default async function MealItem(props) {
             ? introduction
             : introduction.substring(0, 90) + "..."}
         </p>
+        <p className={classes.timestamp}>{timeAgo(new Date(created_at))}</p>
         <div className={classes.actions}>
           <Link href={`/meals/${_id.toString()}`}>Chi tiết</Link>
         </div>

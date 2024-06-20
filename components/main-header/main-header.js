@@ -143,7 +143,6 @@ export default function MainHeader() {
                     dropdown ? setDropdown("") : setDropdown(classes.hidden);
                   }}
                 />
-                <p className={classes.username}>{user.name || user.email}</p>
               </div>
             </>
           )}

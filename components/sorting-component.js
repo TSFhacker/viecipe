@@ -17,13 +17,28 @@ export default function SortingComponent({ handleSorting }) {
         onClick={handleFilterDropdown}
       />
       <ul className={`${classes.dropdown} ${dropdownVisibility}`}>
-        <li onClick={() => handleSorting("newest")}>
+        <li
+          onClick={() => {
+            setDropdownVisibility(classes.hidden);
+            handleSorting("newest");
+          }}
+        >
           Sắp xếp theo ngày đăng mới nhất
         </li>
-        <li onClick={() => handleSorting("oldest")}>
+        <li
+          onClick={() => {
+            setDropdownVisibility(classes.hidden);
+            handleSorting("oldest");
+          }}
+        >
           Sắp xếp theo ngày đăng cũ nhất nhất
         </li>
-        <li onClick={() => handleSorting("best")}>
+        <li
+          onClick={() => {
+            setDropdownVisibility(classes.hidden);
+            handleSorting("best");
+          }}
+        >
           Sắp xếp theo lượt đánh giá giảm dần
         </li>
       </ul>

@@ -143,7 +143,7 @@ function AuthForm(props) {
             className={classes.toggle}
             onClick={switchAuthModeHandler}
           >
-            {isLogin ? "Đăng ký" : "Đăng nhập"}
+            {isLogin ? "Chưa có tài khoản?" : "Đã có tài khoản?"}
           </button>
         </div>
       </form>
