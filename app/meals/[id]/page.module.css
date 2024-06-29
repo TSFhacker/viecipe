@@ -37,6 +37,14 @@
   font-size: 1.5rem;
   color: #cfa69b;
   font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.creator img {
+  border-radius: 100%;
+  margin-right: 1rem;
 }
 
 .creator a {
@@ -44,6 +52,8 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: inline-flex;
+  align-items: center;
 }
 
 .creator a:hover,
@@ -59,10 +69,30 @@
   font-size: 1.5rem;
 }
 
+.info {
+  display: flex;
+  width: 50%;
+  gap: 2rem;
+}
+
+.info div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.headerText svg {
+  font-size: 2rem;
+}
+
+.info p {
+  font-size: 1rem;
+}
+
 .instructions {
   font-size: 1.25rem;
   line-height: 1.5;
-  background-color: lightgrey;
+  background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
   padding: 2rem;
@@ -82,8 +112,54 @@
 .rating {
   width: 2rem;
   height: 2rem;
-  fill: #ffba00;
+  fill: black;
   display: inline-block;
+}
+
+.intro {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  max-width: 60rem;
+  margin: 2rem auto;
+  animation: fade-slide-in-from-bottom 1s ease-out forwards;
+}
+
+.tags div {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.tags a {
+  background: lightblue;
+  padding: 0.3rem 0.5rem;
+  border-radius: 1rem;
+  color: black;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.tags a:hover {
+  background: linear-gradient(90deg, #f9572a, #ff8a05);
+  padding: 0.3rem 0.5rem;
+  border-radius: 1rem;
+  color: white;
+}
+
+.main_content {
+  display: flex;
+}
+
+.content {
+  width: 70%;
 }
 
 @keyframes fade-slide-in-from-left {

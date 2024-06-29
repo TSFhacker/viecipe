@@ -6,8 +6,6 @@ export default function MealsFormSubmit() {
   const { pending } = useFormStatus();
 
   return (
-    <button disabled={pending}>
-      {pending ? "Đang tải..." : "Chia sẻ"}
-    </button>
+    <button disabled={pending}>{pending ? "Đang tải..." : "Chia sẻ"}</button>
   );
 }

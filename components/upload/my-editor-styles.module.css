@@ -1,0 +1,79 @@
+.editor {
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  cursor: text;
+  padding: 16px;
+  border-radius: 2px;
+  margin-bottom: 2em;
+  box-shadow: inset 0px 1px 8px -3px #ababab;
+  background: #fefefe;
+  color: black;
+  overflow: scroll;
+}
+
+.editor img {
+  max-width: 100%;
+  max-height: 20rem;
+  display: inline-block;
+}
+
+.editor button {
+  cursor: pointer;
+}
+
+.editor :global(.public-DraftEditor-content) {
+  min-height: 30rem;
+  padding: 2rem;
+}
+
+.options {
+  margin-bottom: 20px;
+}
+
+.addFile {
+  width: 3rem;
+}
+
+.imageInput {
+  display: none !important;
+}
+
+.button {
+  cursor: pointer;
+  font: inherit;
+  color: white;
+  background: linear-gradient(90deg, #ff8a05, #f9b331);
+  border-radius: 4px;
+  padding: 0.5rem 2.5rem;
+  font-weight: 700;
+  border: none;
+  text-align: center;
+}
+
+.headlineButtonWrapper {
+  display: inline-block;
+}
+
+.headlineButton {
+  background: #fbfbfb;
+  color: #888;
+  font-size: 18px;
+  border: 0;
+  padding-top: 5px;
+  vertical-align: bottom;
+  height: 34px;
+  width: 36px;
+  cursor: pointer;
+}
+
+.headlineButton:hover,
+.headlineButton:focus {
+  background: #f3f3f3;
+}
+.toolbar {
+  height: 12rem;
+}
+
+.hiddenInput {
+  display: none !important;
+}

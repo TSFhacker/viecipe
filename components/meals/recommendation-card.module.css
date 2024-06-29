@@ -1,0 +1,85 @@
+.card_container {
+  display: flex;
+  width: 25rem;
+  height: 10rem;
+  border-radius: 2rem;
+  background: white;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+.card_info {
+  width: 100%;
+  padding-right: 1rem;
+  position: relative;
+}
+
+.card_info a {
+  text-decoration: none;
+}
+
+.card_info a:hover,
+.card_info a:active {
+  background: linear-gradient(90deg, #f9572a, #ff8a05);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 18px rgba(248, 190, 42, 0.8);
+}
+
+.card_container h2 {
+  text-align: center;
+  margin: 0;
+}
+
+.card_container img {
+  width: 8rem;
+  height: 10rem;
+  object-fit: cover;
+}
+
+.card_info img {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 100%;
+}
+
+.actions {
+  padding: 1rem;
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+}
+
+.actions a {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: #f4d03f;
+  background-image: linear-gradient(132deg, #f4d03f 0%, #16a085 100%);
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.actions a:hover,
+.actions a:active {
+  background: linear-gradient(132deg, #16a085 0%, #f4d03f 100%);
+  box-shadow: 0 0 12px #f4d03f;
+}
+
+.user_info {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+  color: #ff8a05;
+}
+
+.time {
+  text-align: right;
+  font-size: 0.7rem;
+  margin: 0;
+}
