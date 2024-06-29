@@ -14,6 +14,7 @@
 
 .friend_list {
   width: 28%;
+  padding: 2rem 1rem;
 }
 
 .message_section {
@@ -28,27 +29,50 @@
   gap: 0.5rem;
   height: 90%;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .message_row {
   width: 100%;
+  display: flex;
+}
+
+.message_row > div {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  width: min-content;
+  max-width: 60%;
+}
+
+.message_row img {
+  border-radius: 100%;
+}
+
+.time {
+  font-size: 0.7rem;
 }
 
 .fromMe {
-  display: flex;
-  justify-content: end;
+  flex-direction: row-reverse;
 }
 
 .message {
-  width: fit-content;
-  max-width: 40%;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   background-color: #f4d03f;
   background-image: linear-gradient(132deg, #f4d03f 0%, #16a085 100%);
   color: #ffffff;
   font-weight: bold;
-  margin-right: 0.5rem;
+  max-width: 100%;
+}
+
+.basic_info {
+  width: fit-content;
+  max-width: 50%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .send {
@@ -77,4 +101,46 @@
 
 .user_info {
   width: 28%;
+  text-align: center;
+}
+
+.fromMe > div {
+  margin-right: 4rem;
+}
+
+.convo_link {
+  width: 100%;
+  height: 4rem;
+  overflow: hidden;
+  padding: 1rem;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.convo_link img {
+  margin-right: 1rem;
+}
+
+.friend_list a {
+  text-decoration: none;
+}
+
+.convo_link:hover {
+  background-color: gray;
+  overflow: hidden;
+}
+
+.current_chat {
+  background-color: lightgray;
+}
+
+.unread_count {
+  height: 1.3rem;
+  width: 1.3rem;
+  background-color: red;
+  border-radius: 100%;
+  color: white;
+  text-align: center;
+  margin-left: 2rem;
 }

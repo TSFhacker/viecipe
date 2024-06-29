@@ -7,8 +7,11 @@ import classes from "./meals-grid.module.css";
 import { usePathname } from "next/navigation";
 import SortingComponent from "../sorting-component";
 import ReactPaginate from "react-paginate";
+import { useSocket } from "../context/socket-context";
 
 export default function MealsGrid({ meals, fypRecipes, bookmarked, session }) {
+  const { socket, messages, setMessages, userId } = useSocket();
+  console.log(socket, messages, userId);
   const [currentPage, setCurrentPage] = useState("fyp");
   const [displayRecipes, setDisplayRecipes] = useState(fypRecipes || meals);
   const [itemOffset, setItemOffset] = useState(0);

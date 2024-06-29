@@ -51,6 +51,10 @@
   color: black;
 }
 
+.authenticated_actions svg:hover {
+  
+}
+
 .custom-font-light {
   line-height: 30px;
   font-size: 21px;

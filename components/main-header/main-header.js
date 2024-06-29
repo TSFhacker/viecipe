@@ -12,7 +12,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaSearch } from "react-icons/fa";
 import defaultImage from "@/assets/default_profile.svg";
-import { CiBellOn } from "react-icons/ci";
+import { CiBellOn, CiMail } from "react-icons/ci";
+
 import { timeAgo } from "@/lib/helper";
 import Loading from "@/app/meals/loading";
 
@@ -26,11 +27,12 @@ export default function MainHeader() {
     classes.hidden
   );
   const [unread, setUnread] = useState(null);
+  const [unreadMessagesCount, setUnreadMessagesCount] = useState(0);
   const router = useRouter();
   const pathName = usePathname();
 
   useEffect(() => {
-    getSession().then((session) => {
+    getSession().then(async (session) => {
       setLoggedIn(session ? true : false);
       session?.user.admin && setAdmin(true);
       setUser(session?.user || null);
@@ -41,6 +43,18 @@ export default function MainHeader() {
             ).length
           : null
       );
+
+      if (session) {
+        let result = await fetch("/api/message", {
+          method: "POST",
+          body: JSON.stringify({ userId: session.user._id }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        result = await result.json();
+        setUnreadMessagesCount(result);
+      }
     });
   }, [pathName]);
 
@@ -71,6 +85,10 @@ export default function MainHeader() {
     }
   };
 
+  const handleRedirectToChat = function () {
+    router.replace("/chat/");
+  };
+
   return (
     <>
       <MainHeaderBackground />
@@ -97,6 +115,13 @@ export default function MainHeader() {
         <nav className={classes.nav}>
           {user && (
             <>
+              <CiMail
+                onClick={handleRedirectToChat}
+                className={classes.notification_icon}
+              />
+              {unreadMessagesCount > 0 && (
+                <p className={classes.unreadMessages}>{unreadMessagesCount}</p>
+              )}
               {!admin && (
                 <>
                   <CiBellOn

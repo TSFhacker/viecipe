@@ -5,7 +5,6 @@ import defaultProfile from "@/assets/default_profile.svg";
 import { timeAgo } from "@/lib/helper";
 
 export default function RecommendationCard({ info }) {
-  console.log(info);
   return (
     <div className={classes.card_container}>
       <Image

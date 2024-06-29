@@ -2,6 +2,7 @@ import { verifyPassword } from "@/lib/auth";
 import { connectToDatabase } from "@/lib/db";
 import { findUserWithNotifications, getUserIdByEmail } from "@/lib/user";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { revalidatePath } from "next/cache";
 
 export const options = {
   providers: [
@@ -49,6 +50,7 @@ export const options = {
           throw new Error("Sai mật khẩu");
         }
         client.close();
+        revalidatePath("/meals");
         return {
           email: user.email,
           name: user.name,
