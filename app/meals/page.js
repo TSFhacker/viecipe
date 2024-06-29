@@ -9,7 +9,6 @@ import Loading from "./loading";
 
 async function Meals() {
   const session = await getServerSession();
-  console.log(session);
 
   const recipes = await getAllRecipes();
 

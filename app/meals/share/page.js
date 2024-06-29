@@ -175,7 +175,6 @@ export default function ShareMealPage() {
   const pathName = usePathname();
   useEffect(() => {
     getSession().then((session) => {
-      console.log(session);
       if (!session) router.replace("/auth");
       setEmail(session.user.email);
     });
@@ -320,7 +319,6 @@ export default function ShareMealPage() {
               className={classes.mutipleInput}
               placeholder="Món này ở vùng ..."
               onChange={showSpecificRegion}
-              onMenuClose={(e) => console.log(this)}
             />
           </div>
 

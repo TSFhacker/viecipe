@@ -16,13 +16,13 @@ export default async function RecommendationList({
 }) {
   let allRecipes = [];
   const occasionsRecommendation = occasions
-    ? await getRecipesByOccasions(occasions)
+    ? await getRecipesByOccasions(occasions, recipeId)
     : [];
   const regionsRecommendation = regions
-    ? await getRecipesByRegions(regions)
+    ? await getRecipesByRegions(regions, recipeId)
     : [];
   const ingredientsRecommendation = ingredients
-    ? await getRecipesByIngredients(ingredients)
+    ? await getRecipesByIngredients(ingredients, recipeId)
     : [];
 
   const totalRecommendation =
@@ -35,8 +35,6 @@ export default async function RecommendationList({
       .sort((a, b) => b.ratingAvg - a.ratingAvg)
       .slice(0, 10 - totalRecommendation)
       .filter((recipe) => recipe._id != recipeId);
-
-    console.log(allRecipes.length);
   }
 
   return (

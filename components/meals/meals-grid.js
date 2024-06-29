@@ -13,8 +13,6 @@ export default function MealsGrid({ meals, fypRecipes, bookmarked, session }) {
   const [displayRecipes, setDisplayRecipes] = useState(fypRecipes || meals);
   const [itemOffset, setItemOffset] = useState(0);
 
-  console.log(meals);
-
   const itemsPerPage = 9;
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = displayRecipes.slice(itemOffset, endOffset);

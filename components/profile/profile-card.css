@@ -34,8 +34,21 @@
 }
 
 .custom-m-b-0 {
+  width: 100%;
   font-size: 3rem;
   margin-bottom: 1rem;
+}
+
+.authenticated_actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.authenticated_actions svg {
+  font-size: 2rem;
+  color: black;
 }
 
 .custom-font-light {

@@ -27,7 +27,6 @@ export default function CustomTable({ data }) {
   const [columnResizeDirection, setColumnResizeDirection] = useState("ltr");
   const columnHelper = createColumnHelper();
   let columns = [];
-  console.log(data);
 
   const blockUser = async function (userId) {
     try {
@@ -219,7 +218,6 @@ export default function CustomTable({ data }) {
         id: "block",
         header: () => "Hành động",
         cell: (info) => {
-          console.log(info.getValue());
           return info.getValue().status === "blocked" ? (
             <CgUnblock
               className={`${classes.icon} ${classes.unblock}`}

@@ -20,7 +20,6 @@ export default function CommentSection({
     bookmarked ? classes.bookmarked : ""
   );
 
-  console.log(bookmarked);
   const handleComment = function () {
     try {
       fetch("/api/comment", {

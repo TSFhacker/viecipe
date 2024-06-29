@@ -55,7 +55,6 @@ const HeadlinesPicker = (props) => {
   useEffect(() => {
     let count = 0;
     const onWindowClick = () => {
-      console.log("clicked " + count);
       if (count === 0) {
         count++;
         return;
@@ -64,11 +63,9 @@ const HeadlinesPicker = (props) => {
       onOverrideContent(undefined);
     };
 
-    console.log("Adding event listener for window click");
     window.addEventListener("click", onWindowClick);
 
     return () => {
-      console.log("Removing event listener for window click");
       window.removeEventListener("click", onWindowClick);
     };
   }, [onOverrideContent]);
@@ -87,7 +84,6 @@ const HeadlinesPicker = (props) => {
 const HeadlinesButton = ({ onOverrideContent }) => {
   const onClick = useCallback(() => {
     onOverrideContent(HeadlinesPicker);
-    console.log("click headline button");
   }, [onOverrideContent]);
 
   return (
@@ -114,8 +110,6 @@ const MyEditor = ({ editorRef }) => {
     setEditorState(state);
     const contentState = state.getCurrentContent();
     const rawContentState = convertToRaw(contentState);
-    console.log(JSON.stringify(rawContentState));
-    console.log(rawContentState);
     setContent(
       rawContentState?.blocks.length === 1 &&
         rawContentState?.blocks[0].text === "" &&

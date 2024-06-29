@@ -1,10 +1,13 @@
 import { useState, useRef } from "react";
 import classes from "./auth-form.module.css";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ImagePicker from "../meals/image-picker";
+import { getServerSession } from "next-auth";
+// import { options } from "@/app/api/auth/[...nextauth]/options";
+import { io } from "socket.io-client";
 
 function AuthForm(props) {
   const emailInputRef = useRef();
@@ -46,6 +49,13 @@ function AuthForm(props) {
       email: enteredEmail,
       password: enteredPassword,
     });
+
+    const session = await getSession();
+
+    const socket = io("http://localhost:8000"); // Replace with your server URL
+
+    // Example: Join a room based on user ID
+    socket.emit("joinRoom", session.user._id);
 
     if (!result.error) {
       router.replace(`/${props.callbackUrl}`);

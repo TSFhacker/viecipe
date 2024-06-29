@@ -7,6 +7,10 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import defaultImage from "@/assets/default_profile.svg";
+import { RiMessage2Fill } from "react-icons/ri";
+import { redirects } from "@/next.config";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default function ProfileCard({ user }) {
   const [authenticated, setAuthenticated] = useState(false);
@@ -16,7 +20,6 @@ export default function ProfileCard({ user }) {
   );
   const [followers, setFollowers] = useState(user.followers.length);
   const [followings, setFollowings] = useState(user.following.length);
-  console.log(user);
 
   useEffect(() => {
     getSession().then((session) => {
@@ -56,6 +59,7 @@ export default function ProfileCard({ user }) {
       alert(error.message);
     }
   };
+
   return (
     <div className="custom-card custom-no-border">
       <ToastContainer />
@@ -74,12 +78,17 @@ export default function ProfileCard({ user }) {
         </div>
         <h3 className="custom-m-b-0">{user.name || user.email}</h3>
         {authenticated && user.email !== currentUser?.email && (
-          <button
-            className={`custom-m-t-10 custom-btn custom-btn-primary custom-btn-md custom-btn-rounded ${followedByMe}`}
-            onClick={handleFollow}
-          >
-            {followedByMe ? "Đã theo dõi" : "Theo dõi"}
-          </button>
+          <div className="authenticated_actions">
+            <button
+              className={`custom-m-t-10 custom-btn custom-btn-primary custom-btn-md custom-btn-rounded ${followedByMe}`}
+              onClick={handleFollow}
+            >
+              {followedByMe ? "Đã theo dõi" : "Theo dõi"}
+            </button>
+            <Link href={`/chat/${user._id}`}>
+              <RiMessage2Fill />
+            </Link>
+          </div>
         )}
         <div className="custom-row text-center custom-m-t-20">
           <div className="custom-col-lg-4 custom-col-md-4 custom-m-t-20">

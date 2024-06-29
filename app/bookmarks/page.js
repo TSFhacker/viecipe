@@ -10,8 +10,6 @@ async function Meals() {
   const userId = await getUserIdByEmail(session.user.email);
   const userBookmarks = await getBookmarksByUserId(userId);
 
-  console.log(userBookmarks);
-
   return <MealsGrid meals={userBookmarks} />;
 }
 
