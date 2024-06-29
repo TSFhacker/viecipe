@@ -49,7 +49,7 @@ const Chat = (userId) => {
     if (input.trim()) {
       socket.emit("privateMessage", {
         senderId: senderId,
-        recipientId: senderId,
+        recipientId: userId,
         input: input,
       });
       setInput("");
