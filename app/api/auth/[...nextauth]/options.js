@@ -29,12 +29,10 @@ export const options = {
           email: credentials.email,
         });
         if (!user) {
-          client.close();
           throw new Error("Tên tài khoản không đúng");
         }
 
         if (user.status === "blocked") {
-          client.close();
           throw new Error(
             "Tài khoản này đang bị khóa, hãy liên hệ quản trị viên"
           );
@@ -46,10 +44,8 @@ export const options = {
         );
 
         if (!isValid) {
-          client.close();
           throw new Error("Sai mật khẩu");
         }
-        client.close();
         revalidatePath("/meals");
         return {
           email: user.email,

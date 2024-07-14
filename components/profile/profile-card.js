@@ -8,8 +8,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import defaultImage from "@/assets/default_profile.svg";
 import { RiMessage2Fill } from "react-icons/ri";
-import { redirects } from "@/next.config";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 
 export default function ProfileCard({ user }) {
@@ -19,7 +17,6 @@ export default function ProfileCard({ user }) {
     user.follow_by_me ? "followed" : ""
   );
   const [followers, setFollowers] = useState(user.followers.length);
-  const [followings, setFollowings] = useState(user.following.length);
 
   useEffect(() => {
     getSession().then((session) => {
@@ -92,7 +89,9 @@ export default function ProfileCard({ user }) {
         )}
         <div className="custom-row text-center custom-m-t-20">
           <div className="custom-col-lg-4 custom-col-md-4 custom-m-t-20">
-            <h3 className="custom-m-b-0 custom-font-light">10434</h3>
+            <h3 className="custom-m-b-0 custom-font-light">
+              {user.recipeCount}
+            </h3>
             <small>Công thức</small>
           </div>
           <div className="custom-col-lg-4 custom-col-md-4 custom-m-t-20">

@@ -35,3 +35,12 @@
 .single_user:hover {
   transform: translateY(-0.5rem);
 }
+
+.user_list {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding-bottom: 2rem;
+}

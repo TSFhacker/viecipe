@@ -4,6 +4,16 @@ import MealsGrid from "../meals/meals-grid";
 import { findUserByEmail } from "@/lib/user";
 import { getRecipesByUserId } from "@/lib/recipes";
 import { getServerSession } from "next-auth";
+import Loading from "@/app/meals/loading";
+import { Suspense } from "react";
+
+async function Meals({ user }) {
+  const currentUser = await findUserByEmail(user.email);
+  const userRecipes = await getRecipesByUserId(currentUser._id);
+  const session = await getServerSession();
+
+  return <MealsGrid meals={userRecipes} session={session} />;
+}
 
 async function UserProfile({ user }) {
   // async function changePasswordHandler(passwordData) {
@@ -18,15 +28,13 @@ async function UserProfile({ user }) {
   //   const data = await response.json();
   // }
 
-  const currentUser = await findUserByEmail(user.email);
-
-  const userRecipes = await getRecipesByUserId(currentUser._id);
-  const session = await getServerSession();
   return (
     <section className={classes.profile}>
       <ProfileCard user={user} />
       {/* <ProfileForm onChangePassword={changePasswordHandler} /> */}
-      <MealsGrid meals={userRecipes} session={session} />
+      <Suspense fallback={<Loading />}>
+        <Meals user={user} />
+      </Suspense>
     </section>
   );
 }

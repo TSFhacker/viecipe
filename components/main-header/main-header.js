@@ -60,8 +60,8 @@ export default function MainHeader() {
 
   const handleSignout = () => {
     toast("Đã đăng xuất");
-    router.replace("/auth");
     signOut();
+    router.replace("/auth");
   };
 
   const handleSearch = async function () {

@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import { getUserIdByEmail } from "@/lib/user";
 import { getBookmarksByUserId } from "@/lib/bookmark";
 import Loading from "./loading";
+import { transferData } from "@/lib/db";
 
 async function Meals() {
   const session = await getServerSession();

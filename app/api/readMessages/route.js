@@ -49,11 +49,6 @@ export async function handler(req) {
   } catch (error) {
     // Handle errors and return an error response
     return NextResponse.json({ message: error.message }, { status: 500 });
-  } finally {
-    // Ensure the client connection is closed
-    if (client) {
-      await client.close();
-    }
   }
 }
 

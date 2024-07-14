@@ -31,8 +31,8 @@ const Chat = ({ userId, receiverImage, username, history, convoList }) => {
         let result = await fetch("/api/readMessages", {
           method: "POST",
           body: JSON.stringify({
-            senderId: session.user._id,
-            recipientId: userId,
+            senderId: userId,
+            recipientId: session.user._id,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -113,36 +113,38 @@ const Chat = ({ userId, receiverImage, username, history, convoList }) => {
               }`}
             >
               <div>
-                <div className={classes.basic_info}>
-                  {message.recipientId === senderId && (
-                    <Image
-                      src={
-                        receiverImage
-                          ? `https://dungbui1110-nextjs-foodies-image.s3.ap-southeast-1.amazonaws.com/${receiverImage}`
-                          : defaultProfile
-                      }
-                      alt="anh dai dien"
-                      width={30}
-                      height={30}
-                    />
-                  )}
-                  <div className={classes.message}>{message.input}</div>
-                  {message.recipientId !== senderId && (
-                    <Image
-                      src={
-                        senderImage
-                          ? `https://dungbui1110-nextjs-foodies-image.s3.ap-southeast-1.amazonaws.com/${senderImage}`
-                          : defaultProfile
-                      }
-                      alt="anh dai dien"
-                      width={30}
-                      height={30}
-                    />
-                  )}
+                <div>
+                  <div className={classes.basic_info}>
+                    {message.recipientId === senderId && (
+                      <Image
+                        src={
+                          receiverImage
+                            ? `https://dungbui1110-nextjs-foodies-image.s3.ap-southeast-1.amazonaws.com/${receiverImage}`
+                            : defaultProfile
+                        }
+                        alt="anh dai dien"
+                        width={30}
+                        height={30}
+                      />
+                    )}
+                    <div className={classes.message}>{message.input}</div>
+                    {message.recipientId !== senderId && (
+                      <Image
+                        src={
+                          senderImage
+                            ? `https://dungbui1110-nextjs-foodies-image.s3.ap-southeast-1.amazonaws.com/${senderImage}`
+                            : defaultProfile
+                        }
+                        alt="anh dai dien"
+                        width={30}
+                        height={30}
+                      />
+                    )}
+                  </div>
+                  <p className={classes.time}>
+                    {new Date(message.timestamp).toLocaleTimeString()}
+                  </p>
                 </div>
-                <p className={classes.time}>
-                  {new Date(message.timestamp).toLocaleTimeString()}
-                </p>
               </div>
             </div>
           ))}

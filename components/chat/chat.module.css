@@ -1,6 +1,5 @@
 .chat_container {
   width: 100%;
-  border: 1px solid black;
   display: flex;
   height: 80vh;
   justify-content: space-around;
@@ -35,14 +34,15 @@
 .message_row {
   width: 100%;
   display: flex;
+  height: fit-content;
 }
 
 .message_row > div {
   display: flex;
   flex-direction: column;
   padding: 0;
-  width: min-content;
-  max-width: 60%;
+  width: 60%;
+  margin-right: 0;
 }
 
 .message_row img {
@@ -51,10 +51,23 @@
 
 .time {
   font-size: 0.7rem;
+  width: fit-content;
 }
 
 .fromMe {
+  justify-content: end;
+}
+
+.fromMe > div {
+  display: flex;
+  margin-right: -6rem;
+  padding-right: -4rem;
   flex-direction: row-reverse;
+}
+
+.fromMe > div > * {
+  justify-content: end;
+  width: fit-content;
 }
 
 .message {
@@ -68,8 +81,7 @@
 }
 
 .basic_info {
-  width: fit-content;
-  max-width: 50%;
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 1rem;

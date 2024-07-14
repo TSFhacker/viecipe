@@ -73,3 +73,7 @@
   color: white;
   background: linear-gradient(180deg, #ff8a05, #f9b331);
 }
+
+.loading {
+  color: white;
+}

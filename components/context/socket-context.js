@@ -12,6 +12,7 @@ export const useSocket = () => {
 
 export const SocketProvider = ({ children }) => {
   const [messages, setMessages] = useState([]);
+  const [connection, setConnection] = useState("");
   const [userId, setUserId] = useState(null);
   const pathName = usePathname();
   let notiCount = 0;
@@ -20,6 +21,7 @@ export const SocketProvider = ({ children }) => {
   useEffect(() => {
     getSession().then((session) => {
       if (session) {
+        console.log("joining room");
         setUserId(session.user._id);
 
         socket.emit("joinRoom", session.user._id);
@@ -30,6 +32,7 @@ export const SocketProvider = ({ children }) => {
           socket.on("privateMessage", (message) => {
             setMessages((prevMessages) => [...prevMessages, message]);
 
+            console.log(pathName);
             // Notify user if not on the chat page
             if (!pathName.startsWith("/chat") && notiCount === 0) {
               notiCount++;
@@ -49,7 +52,7 @@ export const SocketProvider = ({ children }) => {
           });
           listenerCount++;
         }
-      }
+      } else console.log("no session");
       return () => {
         // Clean up listeners and close socket on component unmount
         socket.off("privateMessage");
@@ -68,10 +71,12 @@ export const SocketProvider = ({ children }) => {
       console.log("this is checking from the outer return: " + listenerCount);
       // socket.disconnect();
     };
-  }, []); // Only run once on component mount
+  }, [connection]);
 
   return (
-    <SocketContext.Provider value={{ socket, messages, setMessages, userId }}>
+    <SocketContext.Provider
+      value={{ socket, messages, setMessages, userId, setConnection }}
+    >
       <ToastContainer />
       {children}
     </SocketContext.Provider>

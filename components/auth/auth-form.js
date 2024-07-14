@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ImagePicker from "../meals/image-picker";
+import { useSocket } from "../context/socket-context";
+import Loading from "@/app/meals/loading";
 
 function AuthForm(props) {
   const emailInputRef = useRef();
@@ -14,6 +16,8 @@ function AuthForm(props) {
   const imageRef = useRef();
   const [isLogin, setIsLogin] = useState(true);
   const [profilePicture, setProfilePicture] = useState("default");
+  const [isLoading, setIsLoading] = useState(false);
+  const { setConnection } = useSocket();
 
   const router = useRouter();
   function switchAuthModeHandler() {
@@ -49,6 +53,7 @@ function AuthForm(props) {
 
     if (!result.error) {
       router.replace(`/${props.callbackUrl}`);
+      setConnection(enteredEmail);
       return 200;
     } else return result.error;
   };
@@ -59,6 +64,8 @@ function AuthForm(props) {
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
+    setIsLoading(true);
+
     if (isLogin) {
       try {
         const result = await signInAndRedirect(enteredEmail, enteredPassword);
@@ -67,6 +74,8 @@ function AuthForm(props) {
         } else toast(result);
       } catch (error) {
         toast(error.message);
+      } finally {
+        setIsLoading(false);
       }
     } else {
       try {
@@ -74,6 +83,7 @@ function AuthForm(props) {
         const enteredImage = imageRef.current.files[0];
         if (enteredPassword !== enteredPassword2) {
           toast("Mật khẩu xác nhận không khớp");
+          setIsLoading(false);
           return;
         }
         const enteredUsername = userNameInputRef.current.value;
@@ -88,6 +98,8 @@ function AuthForm(props) {
       } catch (error) {
         console.log(error);
         toast(error.message);
+      } finally {
+        setIsLoading(false);
       }
     }
   }
@@ -137,16 +149,19 @@ function AuthForm(props) {
           </>
         )}
         <div className={classes.actions}>
-          <button>{isLogin ? "Đăng nhập" : "Đăng ký"}</button>
+          <button disabled={isLoading}>
+            {isLogin ? "Đăng nhập" : "Đăng ký"}
+          </button>
           <button
             type="button"
             className={classes.toggle}
             onClick={switchAuthModeHandler}
           >
-            {isLogin ? "Chưa có tài khoản?" : "Đã có tài khoản?"}
+            {isLogin && !isLoading ? "Chưa có tài khoản?" : "Đã có tài khoản?"}
           </button>
         </div>
       </form>
+      {isLoading && <Loading className={classes.loading} />}
     </section>
   );
 }

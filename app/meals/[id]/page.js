@@ -238,8 +238,10 @@ export default async function Meal({ params }) {
                 <h1>Nguyên liệu</h1>
                 {meal[0].ingredients.map((ingredient, index) => (
                   <p key={`${ingredient.ingredient}_${index}`}>
-                    <strong>{ingredient.ingredient}</strong>:{" "}
-                    {ingredient.amount}
+                    <Link href={`/search/${ingredient.ingredient}`}>
+                      <strong>{ingredient.ingredient}</strong>
+                    </Link>
+                    :{ingredient.amount}
                   </p>
                 ))}
               </>
