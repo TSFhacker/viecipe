@@ -52,7 +52,6 @@
 }
 
 .authenticated_actions svg:hover {
-  
 }
 
 .custom-font-light {
@@ -111,4 +110,79 @@ p {
 
 .followed {
   background-color: lightskyblue;
+}
+
+.report {
+  position: fixed;
+  width: 40%;
+  height: 20rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f0f8ff;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 3rem;
+  border: 1px solid lightgray;
+  background-color: #f4d03f;
+  background-image: linear-gradient(132deg, #f4d03f 0%, #16a085 100%);
+  color: white;
+}
+
+.report h1 {
+  font-size: 2rem !important;
+}
+
+.report > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.report_icon {
+  cursor: pointer;
+}
+
+.report label {
+  font-size: 1.5rem;
+}
+
+.report p {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.report textarea {
+  border: 1px solid white;
+  background: transparent;
+  border-radius: 2rem;
+  padding: 2rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.report button {
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  padding: 0.5rem 2rem;
+  background: transparent;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 2rem;
+}
+
+.report button:hover {
+  background-color: #f4d03f;
+  background: linear-gradient(180deg, #ff8a05, #f9b331);
+}
+
+.multipleInput div :not([id^="react-select-"][id$="-placeholder"]) {
+  color: black;
 }

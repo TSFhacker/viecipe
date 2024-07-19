@@ -73,7 +73,7 @@
 }
 
 .search input {
-  width: 20rem;
+  width: 25rem;
   height: 3rem;
   border-radius: 2rem;
   padding-left: 1rem;
@@ -120,6 +120,7 @@
   border-radius: 1rem;
   overflow: hidden;
   transition: 0.3s;
+  z-index: 100;
 }
 
 .nav_dropdown li {
@@ -162,11 +163,12 @@
   background-color: lightgrey;
 }
 
-.notification_icon {
+.icon {
   cursor: pointer;
   font-size: 2rem;
   display: inline-block;
   margin-right: 2rem;
+  color: white;
 }
 
 .unread {
@@ -198,6 +200,47 @@
 .unread_noti {
   background-color: lightblue;
 }
+
+.category {
+  margin-left: 5rem;
+}
+
+.category ul {
+  list-style: none;
+  max-height: 40rem;
+}
+
+.category li {
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  height: 100%;
+}
+
+.occasion_list {
+  left: 20rem;
+  top: 6rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.region_list {
+  left: 24rem;
+  top: 6rem;
+}
+
+.daytime_list {
+  left: 28rem;
+  top: 6rem;
+  height: 10rem;
+}
+
+.mealtype_list {
+  left: 32rem;
+  top: 6rem;
+  height: 20rem;
+}
+
 .hidden {
-  height: 0;
+  height: 0 !important;
 }

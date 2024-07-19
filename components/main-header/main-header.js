@@ -10,7 +10,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { FaSearch } from "react-icons/fa";
+import {
+  FaSearch,
+  FaRegCalendarAlt,
+  FaMapMarkedAlt,
+  FaClock,
+} from "react-icons/fa";
+import { FaBowlFood } from "react-icons/fa6";
 import defaultImage from "@/assets/default_profile.svg";
 import { CiBellOn, CiMail } from "react-icons/ci";
 
@@ -26,10 +32,75 @@ export default function MainHeader() {
   const [notificationDropdown, setNotificationDropdown] = useState(
     classes.hidden
   );
+  const [daytimeDropdown, setDaytimeDropdown] = useState(classes.hidden);
+  const [occasionDropdown, setOccasionDropdown] = useState(classes.hidden);
+  const [regionDropdown, setRegionDropdown] = useState(classes.hidden);
+  const [mealtypeDropdown, setMealtypeDropdown] = useState(classes.hidden);
   const [unread, setUnread] = useState(null);
   const [unreadMessagesCount, setUnreadMessagesCount] = useState(0);
   const router = useRouter();
   const pathName = usePathname();
+
+  const dayTime = [
+    { value: "Bữa sáng", label: "Bữa sáng" },
+    { value: "Bữa trưa", label: "Bữa trưa" },
+    { value: "Bữa tối", label: "Bữa tối" },
+  ];
+
+  const mealtype = [
+    { value: "Món chính", label: "Món chính" },
+    { value: "Ăn nhẹ/Ăn vặt", label: "Ăn nhẹ/Ăn vặt" },
+    { value: "Khai vị", label: "Khai vị" },
+    { value: "Tráng miệng", label: "Tráng miệng" },
+    { value: "Giải khát", label: "Giải khát" },
+  ];
+
+  const occasions = [
+    { value: "Hội Xuân Núi Bà", label: "Hội Xuân Núi Bà" },
+    { value: "Hội Đống Đa", label: "Hội Đống Đa" },
+    { value: "Hội đền Hai Bà Trưng", label: "Hội đền Hai Bà Trưng" },
+    { value: "Hội Chùa Hương", label: "Hội Chùa Hương" },
+    { value: "Hội Chùa Đậu", label: "Hội Chùa Đậu" },
+    { value: "Lễ hội đua Voi", label: "Lễ hội đua Voi" },
+    { value: "Hội Lim", label: "Hội Lim" },
+    { value: "Hội Côn Sơn", label: "Hội Côn Sơn" },
+    { value: "Hội Phủ Dầy", label: "Hội Phủ Dầy" },
+    { value: "Hội Chùa Thầy", label: "Hội Chùa Thầy" },
+    { value: "Hội Chùa Tây Phương", label: "Hội Chùa Tây Phương" },
+    { value: "Lễ hội Hoa Lư", label: "Lễ hội Hoa Lư" },
+    { value: "Lễ hội Gò Tháp", label: "Lễ hội Gò Tháp" },
+    { value: "Giỗ Tổ Hùng Vương", label: "Giỗ Tổ Hùng Vương" },
+    { value: "Hội Đâm Trâu", label: "Hội Đâm Trâu" },
+    { value: "Hội Gióng", label: "Hội Gióng" },
+    { value: "Hội Bà Chúa Xứ", label: "Hội Bà Chúa Xứ" },
+    { value: "Hội Lăng Lê Văn Duyệt", label: "Hội Lăng Lê Văn Duyệt" },
+    { value: "Hội Chọi Trâu Đồ Sơn", label: "Hội Chọi Trâu Đồ Sơn" },
+    { value: "Hội Nghinh Ông", label: "Hội Nghinh Ông" },
+    { value: "Hội Côn Sơn - Kiếp Bạc", label: "Hội Côn Sơn - Kiếp Bạc" },
+    { value: "Lễ Giáng Sinh", label: "Lễ Giáng Sinh" },
+    { value: "Tết Nguyên Tiêu", label: "Tết Nguyên Tiêu" },
+    { value: "Tết Hàn Thực", label: "Tết Hàn Thực" },
+    { value: "Lễ Phục Sinh", label: "Lễ Phục Sinh" },
+    { value: "Lễ Phật Đản", label: "Lễ Phật Đản" },
+    { value: "Tết Đoan Ngọ", label: "Tết Đoan Ngọ" },
+    {
+      value: "Tết Trung nguyên / Lễ Vu-lan",
+      label: "Tết Trung nguyên / Lễ Vu-lan",
+    },
+    { value: "Tết Trung Thu", label: "Tết Trung Thu" },
+    { value: "Ngày Đưa Ông Táo Về Trời", label: "Ngày Đưa Ông Táo Về Trời" },
+  ];
+
+  const regions = [
+    { value: "Đông Bắc Bộ", label: "Đông Bắc Bộ" },
+    { value: "Tây Bắc Bộ", label: "Tây Bắc Bộ" },
+    { value: "Đồng bằng sông Hồng", label: "Đồng bằng sông Hồng" },
+    { value: "Bắc Trung Bộ", label: "Bắc Trung Bộ" },
+    { value: "Nam Trung Bộ", label: "Nam Trung Bộ" },
+    { value: "Tây Nguyên", label: "Tây Nguyên" },
+    { value: "Đông Nam Bộ", label: "Đông Nam Bộ" },
+    { value: "Tây Nam Bộ", label: "Tây Nam Bộ" },
+  ];
 
   useEffect(() => {
     getSession().then(async (session) => {
@@ -99,10 +170,91 @@ export default function MainHeader() {
           Viecipe
         </Link>
 
+        <div className={classes.category}>
+          <FaRegCalendarAlt
+            className={classes.icon}
+            onClick={() =>
+              setOccasionDropdown(occasionDropdown ? "" : classes.hidden)
+            }
+          />
+          <ul
+            className={`${classes.nav_dropdown} ${classes.occasion_list} ${occasionDropdown}`}
+          >
+            {!admin &&
+              occasions.map((occasion) => (
+                <li onClick={() => setOccasionDropdown(classes.hidden)}>
+                  <NavLink
+                    href={`/category/occasion/${encodeURI(occasion.value)}`}
+                  >
+                    {occasion.label}
+                  </NavLink>
+                </li>
+              ))}
+          </ul>
+          <FaMapMarkedAlt
+            className={classes.icon}
+            onClick={() =>
+              setRegionDropdown(regionDropdown ? "" : classes.hidden)
+            }
+          />
+          <ul
+            className={`${classes.nav_dropdown} ${classes.region_list} ${regionDropdown}`}
+          >
+            {!admin &&
+              regions.map((region) => (
+                <li onClick={() => setRegionDropdown(classes.hidden)}>
+                  <NavLink href={`/category/region/${encodeURI(region.value)}`}>
+                    {region.label}
+                  </NavLink>
+                </li>
+              ))}
+          </ul>
+          <FaClock
+            className={classes.icon}
+            onClick={() =>
+              setDaytimeDropdown(daytimeDropdown ? "" : classes.hidden)
+            }
+          />
+          <ul
+            className={`${classes.nav_dropdown} ${classes.daytime_list} ${daytimeDropdown}`}
+          >
+            {!admin &&
+              dayTime.map((daytime) => (
+                <li onClick={() => setDaytimeDropdown(classes.hidden)}>
+                  <NavLink
+                    href={`/category/daytime/${encodeURI(daytime.value)}`}
+                  >
+                    {daytime.label}
+                  </NavLink>
+                </li>
+              ))}
+          </ul>
+          <FaBowlFood
+            className={classes.icon}
+            onClick={() =>
+              setMealtypeDropdown(mealtypeDropdown ? "" : classes.hidden)
+            }
+          />
+          <ul
+            className={`${classes.nav_dropdown} ${classes.mealtype_list} ${mealtypeDropdown}`}
+          >
+            {!admin &&
+              mealtype.map((mealtype) => (
+                <li onClick={() => setDaytimeDropdown(classes.hidden)}>
+                  <NavLink
+                    href={`/category/mealtype/${encodeURI(mealtype.value)}`}
+                  >
+                    {mealtype.label}
+                  </NavLink>
+                </li>
+              ))}
+          </ul>
+        </div>
+
         <div className={classes.search}>
           <input
             type="text"
-            placeholder="Tìm công thức của bạn"
+            placeholder="Tìm công thức của bạn, phân cách bằng dấu ','"
             onChange={(e) => setSearchInput(e.target.value)}
             value={searchInput}
             onKeyDown={(e) => {
@@ -115,10 +267,7 @@ export default function MainHeader() {
         <nav className={classes.nav}>
           {user && (
             <>
-              <CiMail
-                onClick={handleRedirectToChat}
-                className={classes.notification_icon}
-              />
+              <CiMail onClick={handleRedirectToChat} className={classes.icon} />
               {unreadMessagesCount > 0 && (
                 <p className={classes.unreadMessages}>{unreadMessagesCount}</p>
               )}
@@ -126,7 +275,7 @@ export default function MainHeader() {
                 <>
                   <CiBellOn
                     onClick={handleCheckNotification}
-                    className={classes.notification_icon}
+                    className={classes.icon}
                   />
                   {unread > 0 && <p className={classes.unread}>{unread}</p>}
                   <ul
@@ -178,9 +327,6 @@ export default function MainHeader() {
                   <li onClick={() => setDropdown(classes.hidden)}>
                     <NavLink href="/meals">Công thức</NavLink>
                   </li>
-                  <li onClick={() => setDropdown(classes.hidden)}>
-                    <NavLink href="/community">Cộng đồng</NavLink>
-                  </li>
                 </>
               )}
               {loggedIn && (
@@ -201,6 +347,11 @@ export default function MainHeader() {
                       </li>
                       <li onClick={() => setDropdown(classes.hidden)}>
                         <NavLink href="/admin/recipes">Công thức</NavLink>
+                      </li>
+                      <li onClick={() => setDropdown(classes.hidden)}>
+                        <NavLink href="/admin/reports">
+                          Danh sách tố cáo
+                        </NavLink>
                       </li>
                     </>
                   )}

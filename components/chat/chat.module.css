@@ -14,6 +14,8 @@
 .friend_list {
   width: 28%;
   padding: 2rem 1rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .message_section {
@@ -128,6 +130,7 @@
   transition: 0.3s;
   display: flex;
   align-items: center;
+  width: 90%;
 }
 
 .convo_link img {
@@ -155,4 +158,9 @@
   color: white;
   text-align: center;
   margin-left: 2rem;
+}
+
+.gpt_link {
+  position: absolute;
+  bottom: 2rem;
 }

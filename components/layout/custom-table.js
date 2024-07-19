@@ -164,7 +164,7 @@ export default function CustomTable({ data }) {
         ),
       }),
     ];
-  } else {
+  } else if (pathName === "/admin/users") {
     columns = [
       columnHelper.accessor("image", {
         header: () => "Ảnh",
@@ -232,6 +232,46 @@ export default function CustomTable({ data }) {
         },
       }),
     ];
+  } else {
+    columns = [
+      columnHelper.accessor("reporter", {
+        header: () => "Người tố cáo",
+        cell: (info) => info.getValue().name || info.getValue().email,
+        footer: (info) => info.column.id,
+      }),
+      columnHelper.accessor("reported", {
+        header: () => "Đối tượng bị tố cáo",
+        cell: (info) =>
+          info.getValue().name ||
+          info.getValue().email ||
+          info.getValue().recipe_name,
+        footer: (info) => info.column.id,
+      }),
+      columnHelper.accessor("reason", {
+        header: () => "Lý do",
+        cell: (info) => info.getValue().map((reason) => <div>{reason}</div>),
+        footer: (info) => info.column.id,
+      }),
+      columnHelper.accessor("created_at", {
+        header: () => "Thời gian gửi",
+        cell: (info) => new Date(info.getValue()).toLocaleTimeString(),
+        footer: (info) => info.column.id,
+      }),
+      columnHelper.accessor((row) => row, {
+        id: "link",
+        header: () => "Link",
+        cell: (info) => (
+          <Link
+            href={`/${info.getValue().type === "user" ? "profile" : "meals"}/${
+              info.getValue().reported_id
+            }`}
+          >
+            Link
+          </Link>
+        ),
+        footer: (info) => info.column.id,
+      }),
+    ];
   }
 
   const table = useReactTable({
@@ -248,6 +288,7 @@ export default function CustomTable({ data }) {
   return (
     <>
       <ToastContainer />
+      <h1 className={classes.admin_header}>Danh sách tố cáo</h1>
       <table className={classes.custom_table}>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (

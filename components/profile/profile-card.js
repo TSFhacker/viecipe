@@ -3,12 +3,14 @@
 import Image from "next/image";
 import "./profile-card.css";
 import { getSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import defaultImage from "@/assets/default_profile.svg";
 import { RiMessage2Fill } from "react-icons/ri";
 import Link from "next/link";
+import { FaFlag } from "react-icons/fa";
+import Select from "react-select";
 
 export default function ProfileCard({ user }) {
   const [authenticated, setAuthenticated] = useState(false);
@@ -17,6 +19,17 @@ export default function ProfileCard({ user }) {
     user.follow_by_me ? "followed" : ""
   );
   const [followers, setFollowers] = useState(user.followers.length);
+  const [reportVisible, setReportVisible] = useState(false);
+  const reportRef = useRef();
+
+  const reportReasons = [
+    { label: "Nội dung phản cảm", value: "Nội dung phản cảm" },
+    { label: "Nội dung không liên quan", value: "Nội dung không liên quan" },
+    {
+      label: "Nội dung gây ảnh hưởng sức khỏe",
+      value: "Nội dung gây ảnh hưởng sức khỏe",
+    },
+  ];
 
   useEffect(() => {
     getSession().then((session) => {
@@ -57,6 +70,36 @@ export default function ProfileCard({ user }) {
     }
   };
 
+  const handleReport = async function (e) {
+    e.preventDefault();
+    const reasons = reportRef.current.getValue().map((reason) => reason.value);
+
+    try {
+      const response = await fetch("/api/report", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: currentUser._id,
+          reportedId: user._id,
+          type: "user",
+          reason: reasons,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      toast(data.message);
+      setReportVisible(false);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   return (
     <div className="custom-card custom-no-border">
       <ToastContainer />
@@ -85,6 +128,10 @@ export default function ProfileCard({ user }) {
             <Link href={`/chat/${user._id}`}>
               <RiMessage2Fill />
             </Link>
+            <FaFlag
+              onClick={() => setReportVisible(true)}
+              className="report_icon"
+            />
           </div>
         )}
         <div className="custom-row text-center custom-m-t-20">
@@ -106,6 +153,25 @@ export default function ProfileCard({ user }) {
           </div>
         </div>
       </div>
+      {reportVisible && (
+        <form className={`report`} onSubmit={handleReport}>
+          <h1>Báo cáo công thức này</h1>
+          <div>
+            <label htmlFor="reason">Nêu lý do</label>
+            <Select
+              name="reasons"
+              isMulti
+              options={reportReasons}
+              placeholder="Nêu lý do"
+              className={`multipleInput`}
+              ref={reportRef}
+            />
+            {/* <textarea rows={5} id="reason" ref={reportRef} required /> */}
+          </div>
+          <p onClick={() => setReportVisible(false)}>X</p>
+          <button>Báo cáo</button>
+        </form>
+      )}
     </div>
   );
 }

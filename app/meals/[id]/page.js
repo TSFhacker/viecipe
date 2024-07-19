@@ -178,7 +178,10 @@ export default async function Meal({ params }) {
               <div>
                 <FaClock />
                 {meal[0].dayTime.map((time) => (
-                  <Link href={`/search/${encodeURIComponent(time)}`} key={time}>
+                  <Link
+                    href={`/category/daytime/${encodeURIComponent(time)}`}
+                    key={time}
+                  >
                     {time}
                   </Link>
                 ))}
@@ -189,7 +192,7 @@ export default async function Meal({ params }) {
                 <FaRegCalendarAlt />
                 {meal[0].occasions.map((occasion) => (
                   <Link
-                    href={`/search/${encodeURIComponent(occasion)}`}
+                    href={`/category/occasion/${encodeURIComponent(occasion)}`}
                     key={occasion}
                   >
                     {occasion}
@@ -203,7 +206,7 @@ export default async function Meal({ params }) {
                 <div>
                   {meal[0].regions.map((region) => (
                     <Link
-                      href={`/search/${encodeURIComponent(region)}`}
+                      href={`/category/region/${encodeURIComponent(region)}`}
                       key={region}
                     >
                       {region}
@@ -214,7 +217,9 @@ export default async function Meal({ params }) {
                   <div>
                     {meal[0].provinces.map((province) => (
                       <Link
-                        href={`/search/${encodeURIComponent(province)}`}
+                        href={`/category/region/${encodeURIComponent(
+                          province
+                        )}`}
                         key={province}
                       >
                         {province}

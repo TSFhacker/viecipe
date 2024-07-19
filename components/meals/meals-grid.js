@@ -17,7 +17,6 @@ export default function MealsGrid({
   filter,
 }) {
   const { socket, messages, setMessages, userId } = useSocket();
-  console.log(socket, messages, userId);
   const [currentPage, setCurrentPage] = useState("fyp");
   const [displayRecipes, setDisplayRecipes] = useState(fypRecipes || meals);
   const [itemOffset, setItemOffset] = useState(0);
@@ -212,7 +211,6 @@ export default function MealsGrid({
         value: checkbox.closest("label").textContent,
       };
     });
-    console.log(markedCheckbox);
 
     if (markedCheckbox.length === 0) {
       setFilteredRecipes(displayRecipes);
@@ -272,7 +270,6 @@ export default function MealsGrid({
           break;
       }
 
-      console.log(provinceTempList);
       provinceTempList.sort((a, b) => {
         if (a.label < b.label) {
           return -1;

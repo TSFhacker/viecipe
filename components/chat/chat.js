@@ -6,8 +6,9 @@ import { getSession } from "next-auth/react";
 import defaultProfile from "@/assets/default_profile.svg";
 import { useSocket } from "../context/socket-context";
 import classes from "./chat.module.css";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import chatGPT from "@/assets/chatgpt.png";
 
 const Chat = ({ userId, receiverImage, username, history, convoList }) => {
   const [input, setInput] = useState("");
@@ -58,7 +59,7 @@ const Chat = ({ userId, receiverImage, username, history, convoList }) => {
     scrollToBottom();
   }, [messages]);
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (socket && senderId && input.trim()) {
       socket.emit("privateMessage", {
         senderId,
@@ -102,6 +103,20 @@ const Chat = ({ userId, receiverImage, username, history, convoList }) => {
             </div>
           </Link>
         ))}
+        <Link href={`/chat/chat-gpt`} key="chatgpt">
+          <div
+            className={`${classes.convo_link} ${classes.gpt_link} ${
+              userId === "chat-gpt" ? classes.current_chat : ""
+            }`}
+          >
+            <Image src={chatGPT} alt="anh dai dien" width={30} height={30} />
+            ChatGPT
+            {/* {convo.unreadCount > 0 && (
+                <span className={classes.unread_count}>
+                  {convo.unreadCount}
+                </span> */}
+          </div>
+        </Link>
       </div>
       <div className={classes.message_section}>
         <div className={classes.messages}>
@@ -118,9 +133,11 @@ const Chat = ({ userId, receiverImage, username, history, convoList }) => {
                     {message.recipientId === senderId && (
                       <Image
                         src={
-                          receiverImage
-                            ? `https://dungbui1110-nextjs-foodies-image.s3.ap-southeast-1.amazonaws.com/${receiverImage}`
-                            : defaultProfile
+                          userId !== "chat-gpt"
+                            ? receiverImage
+                              ? `https://dungbui1110-nextjs-foodies-image.s3.ap-southeast-1.amazonaws.com/${receiverImage}`
+                              : defaultProfile
+                            : chatGPT
                         }
                         alt="anh dai dien"
                         width={30}
